@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Badge {
+  PEMULA
+  MENENGAH
+  SEPUH
+}
+
+enum CategoryUser {
+  SISWA
+  MAHASISWA
+}
+
+model User {
+  id            String @id @default(cuid())
+  userId        String    
+  username      String?
+  email         String?  
+  imageUrl      String?
+  password      String?
+  profile       Profile?
+  statistic     Statistic?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([email,userId])
+  @@map("user")
+}
+
+
+model Statistic {
+  id        String  @id @default(cuid())
+  userId    String  
+  point     String  @db.Text 
+  badge     Badge   @default(PEMULA)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
+  @@map("statistic")
+}
+
+model Profile {
+  id             String    @id @default(cuid())
+  userId         String    
+  description    String?   @db.Text
+  category       CategoryUser?
+  socialMedia    SocialMedia?
+  website        Website[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
+  @@map("profile")
+}
+
+model SocialMedia {
+  id               String    @id @default(cuid())
+  userId           String    
+  instagramUrl     String?   @db.Text
+  tiktokUrl        String?   @db.Text
+  facebookUrl      String?   @db.Text
+  whatsappNumber   String?   @db.Text
+  githubUrl        String?   @db.Text
+
+  profile Profile @relation(fields: [userId],references: [id],onDelete: Cascade)
+
+  @@unique([userId])
+  @@map("social_media")
+}
+
+model Website {
+  id               String    @id @default(cuid())
+  userId           String   
+  type             String    @db.Text
+  websiteUrl       String    @db.Text
+
+  profile Profile @relation(fields: [userId],references: [id],onDelete: Cascade)
+
+  @@unique([userId])
+  @@map("website")
+}

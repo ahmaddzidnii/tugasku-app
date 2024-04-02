@@ -1,10 +1,14 @@
 import { NavbarDashboard } from "./_components/navbar-dashboard";
+import { SidebarDashboard } from "./_components/sidebar-dashboard";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <NavbarDashboard />
-      {children}
+      <div className="">
+        <SidebarDashboard />
+        <div className="md:ps-72">{children}</div>
+      </div>
     </>
   );
 };
