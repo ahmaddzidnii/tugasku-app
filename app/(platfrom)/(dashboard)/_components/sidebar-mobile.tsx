@@ -21,9 +21,11 @@ export const SidebarMobile = () => {
       >
         <SheetContent
           side="left"
-          className="md:hidden flex flex-col"
+          className="md:hidden flex flex-col w-72"
         >
-          <h1 className="mb-3">Sidebar Mobile</h1>
+          <SheetHeader className="text-start">
+            <h1 className="mb-3">Sidebar Mobile</h1>
+          </SheetHeader>
 
           <SidebarContent />
         </SheetContent>
