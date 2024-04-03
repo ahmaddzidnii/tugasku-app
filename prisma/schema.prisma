@@ -33,6 +33,7 @@ model User {
   password      String?
   profile       Profile?
   statistic     Statistic?
+  class         Class[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -40,7 +41,29 @@ model User {
   @@map("user")
 }
 
+model Class {
+  id            String @id @default(cuid())
+  userId        String
+  name          String
+  description   String? @db.Text
+  teacherName   String
+  tasks         Task[]
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+   @@unique([userId])
+   @@map("class")
+}
+
+model Task {
+  id      String @id @default(cuid())
+  userId  String
+
+  class  Class @relation(fields: [userId],references: [id],onDelete: Cascade)
+
+  @@unique([userId])
+  @@map("task")
+}
 model Statistic {
   id        String  @id @default(cuid())
   userId    String  
