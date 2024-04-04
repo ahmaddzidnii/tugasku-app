@@ -42,7 +42,7 @@ model User {
 }
 
 model Class {
-  id            String @id @default(cuid())
+  classId       String @id @default(cuid())
   userId        String
   name          String
   description   String? @db.Text
@@ -51,17 +51,16 @@ model Class {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-   @@unique([userId])
    @@map("class")
 }
 
 model Task {
   id      String @id @default(cuid())
-  userId  String
+  taskId  String
 
-  class  Class @relation(fields: [userId],references: [id],onDelete: Cascade)
+  class  Class @relation(fields: [taskId],references: [classId],onDelete: Cascade)
 
-  @@unique([userId])
+  @@unique([taskId])
   @@map("task")
 }
 model Statistic {
