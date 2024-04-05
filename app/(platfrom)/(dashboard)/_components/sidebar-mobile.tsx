@@ -22,7 +22,7 @@ export const SidebarMobile = ({ data }: { data: Classes }) => {
       >
         <SheetContent
           side="left"
-          className="md:hidden flex flex-col w-72"
+          className="md:hidden flex flex-col w-80"
         >
           <SheetHeader className="text-start font-bold text-2xl"></SheetHeader>
           <SidebarContent data={data} />

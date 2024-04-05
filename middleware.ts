@@ -12,7 +12,7 @@ export default authMiddleware({
     }
 
     if (auth.userId && auth.isPublicRoute) {
-      return NextResponse.redirect(new URL("/app", req.url));
+      return NextResponse.redirect(new URL("/u", req.url));
     }
 
     if (auth.userId && !auth.isPublicRoute) {

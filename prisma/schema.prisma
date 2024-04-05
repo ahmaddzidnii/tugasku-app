@@ -45,6 +45,7 @@ model Class {
   classId       String @id @default(cuid())
   userId        String
   name          String
+  bannerImageUrl String   
   description   String? @db.Text
   teacherName   String
   tasks         Task[]

@@ -46,6 +46,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         userId: user.id,
         name,
         teacherName,
+        bannerImageUrl: "https://i.ibb.co/y4FSKD2/img-code.jpg",
         description,
       },
     });

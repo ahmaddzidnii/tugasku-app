@@ -16,6 +16,7 @@ export const ListCardClass = async () => {
             classId={item.classId}
             teacherName={item.teacherName}
             description={item.description}
+            image={item.bannerImageUrl}
           />
         ))
       )}

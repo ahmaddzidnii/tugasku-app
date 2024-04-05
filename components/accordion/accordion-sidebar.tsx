@@ -16,15 +16,19 @@ export const AccordionSidebar = ({ data }: { data: Class[] }) => {
   return (
     <Accordion
       type="single"
-      collapsible
       className="w-full"
+      collapsible
     >
       {data.map((item) => (
-        <AccordionItem value={item.classId}>
+        <AccordionItem
+          key={item.classId}
+          value={item.classId}
+          className="h-auto"
+        >
           <AccordionTrigger className="text-start">
             <div className="flex items-center">
               <Link
-                href={`/app/c/${item.classId}`}
+                href={`/u/c/${item.classId}`}
                 className="me-4"
               >
                 <Avatar>
@@ -34,7 +38,7 @@ export const AccordionSidebar = ({ data }: { data: Class[] }) => {
                   />
                 </Avatar>
               </Link>
-              <Link href={`/app/c/${item.classId}`}>
+              <Link href={`/u/c/${item.classId}`}>
                 <h2
                   title={item.name}
                   className="line-clamp-1"

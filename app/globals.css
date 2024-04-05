@@ -4,11 +4,11 @@
 
 .marketing-page {
   background: rgb(255, 255, 255);
-  background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 1) 40%,
-    rgba(171, 79, 233, 0.86) 100%
-  );
+  background: linear-gradient(45deg, rgba(255, 255, 255, 1) 40%, rgba(171, 79, 233, 0.86) 100%);
+}
+
+.scrollbar-custom {
+  scroll-margin-left: 100px;
 }
 
 .card-container {

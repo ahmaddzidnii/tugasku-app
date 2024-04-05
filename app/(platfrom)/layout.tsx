@@ -1,6 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { Roboto } from "next/font/google";
 import { TanstackProvider } from "@/providers/tanstack-provider";
+import { CloseSidebarMobile } from "@/providers/close-sidebar-mobile";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -10,6 +11,7 @@ const PlatformLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <TanstackProvider>
       <ClerkProvider>
+        <CloseSidebarMobile />
         <div className={roboto.className}>{children}</div>
       </ClerkProvider>
     </TanstackProvider>

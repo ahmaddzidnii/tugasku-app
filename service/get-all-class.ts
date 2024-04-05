@@ -16,3 +16,10 @@ export async function getAllClass() {
 
   return data.data;
 }
+export async function getClassById(classId: string) {
+  const { data } = await axiosInstance.get<{ status: number; message: string; data: Class }>(
+    `${process.env.WEB_DOMAIN}/api/v1/classes/${classId}`
+  );
+
+  return data.data;
+}
