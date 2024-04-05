@@ -17,6 +17,9 @@ import {
 
 export const SidebarContent = ({ data }: { data: Classes }) => {
   const pathname = usePathname();
+  const classArchived = data.filter((item) => item.isArchived === true);
+  const classActive = data.filter((item) => item.isArchived === false);
+
   return (
     <>
       <Link
@@ -43,7 +46,7 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
                 scrollHideDelay={0}
                 className=" pe-4"
               >
-                <AccordionSidebar data={data} />
+                <AccordionSidebar data={classActive} />
               </ScrollArea>
             </AccordionContent>
           </AccordionItem>
@@ -56,7 +59,7 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
                 scrollHideDelay={0}
                 className="h-screen pe-4"
               >
-                <AccordionSidebar data={data} />
+                <AccordionSidebar data={classArchived} />
               </ScrollArea>
             </AccordionContent>
           </AccordionItem>

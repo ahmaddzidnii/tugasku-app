@@ -48,6 +48,7 @@ model Class {
   bannerImageUrl String   
   description   String? @db.Text
   teacherName   String
+  isArchived    Boolean @default(false)
   tasks         Task[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

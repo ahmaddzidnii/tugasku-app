@@ -18,7 +18,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-        <NextTopLoader color="#6034D4" />
+        <NextTopLoader
+          color="#6034D4"
+          showSpinner={false}
+        />
         <Toaster position="bottom-right" />
         {children}
       </body>
