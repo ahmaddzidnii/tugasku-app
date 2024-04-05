@@ -1,6 +1,7 @@
 import { ModalProvider } from "@/providers/modal-provider";
 import { NavbarDashboard } from "./_components/navbar-dashboard";
 import { SidebarDashboard } from "./_components/sidebar-dashboard";
+import { Suspense } from "react";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,7 +9,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <ModalProvider />
       <NavbarDashboard />
       <div className="">
-        <SidebarDashboard />
+        <Suspense fallback={null}>
+          <SidebarDashboard />
+        </Suspense>
         <div className="md:ps-72">{children}</div>
       </div>
     </>

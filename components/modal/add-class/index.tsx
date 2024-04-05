@@ -1,4 +1,5 @@
 "use client";
+import toast from "react-hot-toast";
 
 import { useModal } from "@/hooks/use-modal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -12,11 +13,12 @@ export const ModalAddClass = () => {
   const { isOpen, modalName, onClose } = useModal();
   const { execute } = useAction(createClass, {
     onSuccess(data) {
-      console.log(data);
+      toast.success(`Kelas ${data.name} berhasil dibuat!`);
       onClose();
     },
     onError(error) {
       console.log(error);
+      toast.error(error);
     },
   });
 

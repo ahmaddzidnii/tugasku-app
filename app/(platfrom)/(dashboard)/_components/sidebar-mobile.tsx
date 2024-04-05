@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/sheet";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { SidebarContent } from "./sidebar-dekstop";
+import { Classes } from "./types";
 
-export const SidebarMobile = () => {
+export const SidebarMobile = ({ data }: { data: Classes }) => {
   const sidebar = useSidebar();
   return (
     <div className="md:hidden">
@@ -23,11 +24,8 @@ export const SidebarMobile = () => {
           side="left"
           className="md:hidden flex flex-col w-72"
         >
-          <SheetHeader className="text-start">
-            <h1 className="mb-3">Sidebar Mobile</h1>
-          </SheetHeader>
-
-          <SidebarContent />
+          <SheetHeader className="text-start font-bold text-2xl"></SheetHeader>
+          <SidebarContent data={data} />
         </SheetContent>
       </Sheet>
     </div>

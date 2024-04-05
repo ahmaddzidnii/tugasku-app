@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 // for more information about configuring your Middleware
 export default authMiddleware({
   // Allow signed out users to access the specified routes:
-  publicRoutes: ["/", "/api/webhooks(.*)"],
+  publicRoutes: ["/", "/api/webhooks(.*)", "/api/v1(.*)"],
   afterAuth(auth, req) {
     if (!auth.userId && !auth.isPublicRoute) {
       return redirectToSignIn({ returnBackUrl: req.url });
