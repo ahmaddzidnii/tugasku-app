@@ -8,9 +8,7 @@ export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
-    throw new Error(
-      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
-    );
+    throw new Error("Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local");
   }
 
   // Get the headers
@@ -57,20 +55,24 @@ export async function POST(req: Request) {
 
   if (eventType === "user.created") {
     // TODO: CREATE USER TO DATABASE
-    await prisma.user.create({
-      data: {
-        userId: payload.data.id,
-        email: payload.data.email_addresses[0].email_address,
-        imageUrl: payload.data.image_url,
-        username: payload.data.username,
-        statistic: {
-          create: {
-            point: "0",
-            badge: "PEMULA",
+    try {
+      await prisma.user.create({
+        data: {
+          userId: payload.data.id,
+          email: payload.data.email_addresses[0].email_address,
+          imageUrl: payload.data.image_url,
+          username: payload.data.username,
+          statistic: {
+            create: {
+              point: "0",
+              badge: "PEMULA",
+            },
           },
         },
-      },
-    });
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if (eventType === "user.updated") {

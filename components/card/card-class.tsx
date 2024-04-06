@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Meteors } from "../ui/ui-aceternity/meteors";
+import { Skeleton } from "../ui/skeleton";
 
 interface CardClassProps {
   name: string;
@@ -45,6 +46,29 @@ export const CardClass = ({
         {/* Meaty part - Meteor effect */}
         <Meteors number={meteor_number} />
       </div>
+    </div>
+  );
+};
+
+export const CardClassSkeleton = () => {
+  return (
+    <div className="card-container">
+      {Array.from({ length: 8 }).map((_, idx) => (
+        <div
+          key={idx}
+          className="w-full relative z-10 flex flex-col rounded-2xl shadow-sm bg-bacground border border-primary-800  h-full overflow-hidden"
+        >
+          <Skeleton className="h-24" />
+          <div className="relative  p-4 flex flex-col justify-end items-start">
+            <Skeleton className="w-full h-5 mb-2" />
+            <Skeleton className="w-1/2 h-5 mb-3" />
+            <Skeleton className="w-full h-5 mb-3" />
+            <div className="flex">
+              <Skeleton className="w-32 h-10 px-4 py-1 rounded-lg" />
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

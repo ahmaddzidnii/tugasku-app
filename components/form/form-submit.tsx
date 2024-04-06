@@ -3,6 +3,7 @@
 import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Spinner } from "../spinner";
 
 interface FormSubmitProps {
   children: React.ReactNode;
@@ -26,7 +27,7 @@ export const FormSubmit = ({
       variant={variant}
       size="sm"
     >
-      {children}
+      {pending ? <Spinner className="w-4 h-4 fill-white" /> : children}
     </Button>
   );
 };

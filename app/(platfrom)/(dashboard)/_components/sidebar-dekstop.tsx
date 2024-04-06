@@ -21,7 +21,7 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
   const classActive = data.filter((item) => item.isArchived === false);
 
   return (
-    <>
+    <div className="pt-2">
       <Link
         href="/u"
         className={cn("flex items-center p-2 rounded-xl", pathname === "/u" && "bg-muted")}
@@ -65,13 +65,13 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
           </AccordionItem>
         </Accordion>
       </div>
-    </>
+    </div>
   );
 };
 
 export const SidebarDesktop = ({ data }: { data: Classes }) => {
   return (
-    <aside className="h-full z-40 pt-16 ps-5 pe-1 hidden fixed left-0 w-72 border-e-2 border-muted md:block">
+    <aside className="h-full z-40 ps-5 pe-1 hidden fixed left-0 w-72 border-e-2 border-muted md:block">
       <SidebarContent data={data} />
     </aside>
   );

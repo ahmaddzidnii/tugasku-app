@@ -3,11 +3,19 @@ import React from "react";
 
 import { getClassById } from "@/service/get-all-class";
 
+export const generateMetadata = async ({ params }: { params: { id: string } }) => {
+  const ctx = await getClassById(params.id);
+  return {
+    title: `${ctx?.name}`,
+    description: `${ctx?.description}`,
+  };
+};
+
 const CoridorClassPage = async ({ params }: { params: { id: string } }) => {
   const classById = await getClassById(params.id);
   if (!classById) return notFound();
   return (
-    <div className="text-3xl pt-16 px-4 flex flex-col">
+    <div className="text-3xl px-4 flex flex-col">
       <div className="w-full h-[200px] aspect-video rounded-lg relative overflow-hidden">
         <img
           src={classById.bannerImageUrl}

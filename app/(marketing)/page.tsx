@@ -28,7 +28,7 @@ export default function Home() {
             className="w-full lg:w-1/3"
             asChild
           >
-            <Link href="/app">Coba sekarang</Link>
+            <Link href="/u">Coba sekarang</Link>
           </Button>
         </div>
 
