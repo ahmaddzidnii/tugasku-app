@@ -1,6 +1,8 @@
 "use client";
 
 import { Class } from "@prisma/client";
+import Link from "next/link";
+import { useParams, usePathname } from "next/navigation";
 
 import {
   Accordion,
@@ -10,10 +12,11 @@ import {
 } from "@/components/ui/accordion";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export const AccordionSidebar = ({ data }: { data: Class[] }) => {
+  const pathname = usePathname();
+
   return (
     <Accordion
       type="single"
@@ -29,7 +32,7 @@ export const AccordionSidebar = ({ data }: { data: Class[] }) => {
               value={item.classId}
               className={cn("h-auto", isLast && "border-none")}
             >
-              <AccordionTrigger className="text-start">
+              <AccordionTrigger className={cn(" text-start")}>
                 <div className="flex items-center">
                   <Link
                     href={`/u/c/${item.classId}`}
@@ -45,7 +48,10 @@ export const AccordionSidebar = ({ data }: { data: Class[] }) => {
                   <Link href={`/u/c/${item.classId}`}>
                     <h2
                       title={item.name}
-                      className="line-clamp-1"
+                      className={cn(
+                        "line-clamp-1",
+                        pathname.split("/")[3] === item.classId && "font-extrabold"
+                      )}
                     >
                       {item.name}
                     </h2>

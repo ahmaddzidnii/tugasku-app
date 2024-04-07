@@ -3,14 +3,6 @@ import React from "react";
 
 import { getClassById } from "@/service/get-all-class";
 
-export const generateMetadata = async ({ params }: { params: { id: string } }) => {
-  const ctx = await getClassById(params.id);
-  return {
-    title: `${ctx?.name}`,
-    description: `${ctx?.description}`,
-  };
-};
-
 const CoridorClassPage = async ({ params }: { params: { id: string } }) => {
   const classById = await getClassById(params.id);
   if (!classById) return notFound();

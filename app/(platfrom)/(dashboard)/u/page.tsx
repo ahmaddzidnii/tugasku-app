@@ -1,18 +1,14 @@
 import { currentUser } from "@clerk/nextjs";
+import { Suspense } from "react";
 
 import { ButtonAddClass } from "@/components/modal/add-class/button-add-class";
 import { ListCardClass } from "./_components/list-card-class";
-import { Suspense } from "react";
-import { Spinner } from "@/components/spinner";
 import { CardClassSkeleton } from "@/components/card/card-class";
 
-export async function generateMetadata() {
-  const user = await currentUser();
-  return {
-    title: `${user?.username} - Dashboard`,
-    description: "Dashboard",
-  };
-}
+export const metadata = {
+  title: ` Dashboard`,
+  description: "Dashboard",
+};
 
 // img : https://www.gstatic.com/classroom/themes/img_code.jpg
 

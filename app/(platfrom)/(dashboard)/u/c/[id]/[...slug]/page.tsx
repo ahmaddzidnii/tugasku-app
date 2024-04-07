@@ -1,7 +1,15 @@
+import { getClassById } from "@/service/get-all-class";
 import { notFound } from "next/navigation";
 import React from "react";
 
-const OptionsPage = ({ params }: { params: { slug: [string] } }) => {
+interface ParamsProps {
+  params: {
+    id: string;
+    slug: [string];
+  };
+}
+
+const DynamicSlugPage = ({ params }: ParamsProps) => {
   const verifvedSlug = ["task", "settings"];
 
   if (verifvedSlug.includes(params.slug[0])) {
@@ -15,4 +23,4 @@ const OptionsPage = ({ params }: { params: { slug: [string] } }) => {
   return notFound();
 };
 
-export default OptionsPage;
+export default DynamicSlugPage;

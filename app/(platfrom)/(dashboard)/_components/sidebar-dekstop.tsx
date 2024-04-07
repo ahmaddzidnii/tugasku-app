@@ -21,7 +21,10 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
   const classActive = data.filter((item) => item.isArchived === false);
 
   return (
-    <div className="pt-2">
+    <ScrollArea
+      className="max-h-screen pt-2 h-screen"
+      scrollHideDelay={0}
+    >
       <Link
         href="/u"
         className={cn("flex items-center p-2 rounded-xl", pathname === "/u" && "bg-muted")}
@@ -42,12 +45,9 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
               <h1 className="text-lg font-semibold ">Semua Kelas</h1>
             </AccordionTrigger>
             <AccordionContent>
-              <ScrollArea
-                scrollHideDelay={0}
-                className=" pe-4"
-              >
+              <div className=" pe-4">
                 <AccordionSidebar data={classActive} />
-              </ScrollArea>
+              </div>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="diarsipkan">
@@ -55,17 +55,14 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
               <h1 className="text-lg font-semibold ">Diarsipkan</h1>
             </AccordionTrigger>
             <AccordionContent>
-              <ScrollArea
-                scrollHideDelay={0}
-                className="h-screen pe-4"
-              >
+              <div className="h-screen pe-4">
                 <AccordionSidebar data={classArchived} />
-              </ScrollArea>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>
-    </div>
+    </ScrollArea>
   );
 };
 

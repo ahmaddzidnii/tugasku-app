@@ -19,7 +19,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   if (!name || !teacherName) {
     return {
-      error: "Missing fields. Failed to create board",
+      error: "Input tidak lengkap, gagal menambahkan kelas!",
     };
   }
 
@@ -46,14 +46,15 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         userId: user.id,
         name,
         teacherName,
-        bannerImageUrl: "https://i.ibb.co/y4FSKD2/img-code.jpg",
+        bannerImageUrl:
+          "https://firebasestorage.googleapis.com/v0/b/apptugas-4da52.appspot.com/o/images%2Fthemes%2Fimg_code.jpg?alt=media&token=e0f8394f-004e-4567-a2f9-6cb3698a9e09",
         description,
       },
     });
   } catch (error) {
     console.log(error);
     return {
-      error: "Failed to create board",
+      error: "gagal menambahkan kelas",
     };
   }
 

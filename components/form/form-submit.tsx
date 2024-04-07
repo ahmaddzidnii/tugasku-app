@@ -27,7 +27,7 @@ export const FormSubmit = ({
       variant={variant}
       size="sm"
     >
-      {pending ? <Spinner className="w-4 h-4 fill-white" /> : children}
+      {pending ? <Spinner className="w-4 h-4 animate-spin fill-white" /> : children}
     </Button>
   );
 };
