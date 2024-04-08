@@ -2,7 +2,7 @@
 
 import { Class } from "@prisma/client";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import {
   Accordion,

@@ -58,11 +58,17 @@ model Class {
 
 model Task {
   id      String @id @default(cuid())
-  taskId  String
+  classId  String
+  isCompleted Boolean @default(false)
+  isOverdue Boolean @default(false)
+  dueDate String? 
 
-  class  Class @relation(fields: [taskId],references: [classId],onDelete: Cascade)
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 
-  @@unique([taskId])
+  class  Class @relation(fields: [classId],references: [classId],onDelete: Cascade)
+
+  @@unique([classId])
   @@map("task")
 }
 model Statistic {
