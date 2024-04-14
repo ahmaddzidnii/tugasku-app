@@ -32,7 +32,10 @@ export const AccordionSidebar = ({ data }: { data: Class[] }) => {
               value={item.classId}
               className={cn("h-auto", isLast && "border-none")}
             >
-              <AccordionTrigger className={cn(" text-start")}>
+              <AccordionTrigger
+                onClick={() => {}}
+                className={cn(" text-start")}
+              >
                 <div className="flex items-center">
                   <Link
                     href={`/u/c/${item.classId}`}
