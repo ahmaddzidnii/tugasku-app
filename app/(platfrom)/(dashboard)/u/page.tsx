@@ -1,4 +1,3 @@
-import { currentUser } from "@clerk/nextjs";
 import { Suspense } from "react";
 
 import { ButtonAddClass } from "@/components/modal/add-class/button-add-class";
@@ -9,8 +8,6 @@ export const metadata = {
   title: ` Dashboard`,
   description: "Dashboard",
 };
-
-// img : https://www.gstatic.com/classroom/themes/img_code.jpg
 
 const PlatformMainPage = () => {
   return (

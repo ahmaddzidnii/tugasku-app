@@ -39,19 +39,17 @@ export const ModalAddClass = () => {
           <form action={handleSubmit}>
             <FormInput
               id="name-class"
-              label="Nama kelas"
+              label="Nama kelas (wajib)"
               placeholder="Informatika"
-              required
             />
             <FormInput
               id="name-teacher"
-              label="Nama Guru/Dosen"
+              label="Nama Guru/Dosen (wajib)"
               placeholder="Nama dosen"
-              required
             />
             <FormTextarea
               id="description-class"
-              label="Deskripsi kelas"
+              label="Deskripsi kelas (opsional)"
               placeholder="Deskripsi kelas"
             />
             <FormSubmit className="mt-5 w-full">Buat kelas</FormSubmit>

@@ -39,9 +39,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       error: "Tindakan tidak diperbolehkan!",
     };
   }
-
+  let result;
   try {
-    await prisma?.class.delete({
+    result = await prisma?.class.delete({
       where: {
         classId: id,
       },
@@ -54,6 +54,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   }
 
   revalidatePath(`/u/c/${id}`);
+  return {
+    data: result,
+  };
   redirect("/u");
 };
 

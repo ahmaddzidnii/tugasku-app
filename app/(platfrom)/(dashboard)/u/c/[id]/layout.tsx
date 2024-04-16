@@ -9,21 +9,31 @@ import {
   BreadcrumbList,
 } from "@/components/ui/breadcrumb";
 import { getClassById } from "@/service/get-all-class";
-import { SubNavAction } from "./[...slug]/_components/subnav-action";
+import { SubNavAction } from "./_components/subnav-action";
+import { NotFoundUI } from "@/components/error-components/not-found-ui";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const ctx = await getClassById(params.id);
+  if (!ctx) {
+    return {
+      title: "Not Found",
+    };
+  }
   return {
     title: `${ctx?.name}`,
   };
 }
-const CoridorClassLayout = ({
+const CoridorClassLayout = async ({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: { id: string };
 }) => {
+  const ctx = await getClassById(params.id);
+  if (!ctx) {
+    return <NotFoundUI />;
+  }
   return (
     <>
       <div className="sticky mb-5 bg-background h-14 w-full flex items-center px-4 justify-between border-b">
