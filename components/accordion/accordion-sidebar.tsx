@@ -22,7 +22,7 @@ export const AccordionSidebar = ({ data }: { data: Class[] }) => {
               className={cn(
                 "flex items-center py-4 px-2 rounded-md",
                 !isLast && "border-b",
-                pathname.split("/")[3] === item.classId && "bg-secondary"
+                pathname.split("/")[3] === item.classId && "bg-muted"
               )}
             >
               <Link

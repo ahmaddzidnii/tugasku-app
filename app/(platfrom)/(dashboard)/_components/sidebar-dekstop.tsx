@@ -15,7 +15,7 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
   const classActive = data.filter((item) => item.isArchived === false);
 
   return (
-    <div className="pe-4">
+    <div className="pe-2">
       <Accordion
         type="single"
         defaultValue="all"

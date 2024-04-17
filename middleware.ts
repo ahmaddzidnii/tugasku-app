@@ -11,9 +11,9 @@ export default authMiddleware({
       return redirectToSignIn({ returnBackUrl: req.url });
     }
 
-    if (auth.userId && auth.isPublicRoute) {
-      return NextResponse.redirect(new URL("/u", req.url));
-    }
+    // if (auth.userId && auth.isPublicRoute) {
+    //   return NextResponse.redirect(new URL("/u", req.url));
+    // }
 
     if (auth.userId && !auth.isPublicRoute) {
       return NextResponse.next();

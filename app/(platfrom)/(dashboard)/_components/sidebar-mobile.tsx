@@ -1,15 +1,16 @@
 "use client";
 
-import { Sheet, SheetContent, SheetHeader } from "@/components/ui/sheet";
+import Link from "next/link";
+import { HiOutlineHome } from "react-icons/hi2";
+import { Separator } from "@radix-ui/react-select";
+import { usePathname } from "next/navigation";
+
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { SidebarContent } from "./sidebar-dekstop";
 import { Classes } from "./types";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { HiOutlineHome } from "react-icons/hi2";
-import { Separator } from "@radix-ui/react-select";
-import { usePathname } from "next/navigation";
 
 export const SidebarMobile = ({ data }: { data: Classes }) => {
   const sidebar = useSidebar();
@@ -25,10 +26,10 @@ export const SidebarMobile = ({ data }: { data: Classes }) => {
           className="md:hidden flex flex-col w-80"
         >
           <ScrollArea
-            className="h-screen mt-5"
+            className="h-screen"
             scrollHideDelay={0}
           >
-            <div className="me-5">
+            <div>
               <Link
                 href="/u"
                 className={cn("flex items-center p-2 rounded-xl", pathname === "/u" && "bg-muted")}
