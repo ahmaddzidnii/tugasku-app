@@ -28,7 +28,7 @@ export const SidebarDashboard = () => {
         >
           {/* Sidebar top menu */}
           <TopMenuSidebar />
-          <Separator className="my-5" />
+          <Separator className="my-2" />
           {/* Sidebar top menu */}
 
           {/* Sidebar bottom menu */}

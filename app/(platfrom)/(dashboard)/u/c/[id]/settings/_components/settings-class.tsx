@@ -20,7 +20,7 @@ export const SettingClass = ({ classId }: { classId: string }) => {
   });
 
   return (
-    <div className="px-4">
+    <>
       <Button
         disabled={isLoading}
         onClick={() => {
@@ -30,6 +30,6 @@ export const SettingClass = ({ classId }: { classId: string }) => {
       >
         {isLoading ? "Deleting..." : "Delete"}
       </Button>
-    </div>
+    </>
   );
 };

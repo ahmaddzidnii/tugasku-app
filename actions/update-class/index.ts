@@ -1,10 +1,11 @@
 "use server";
 
-import { auth } from "@clerk/nextjs";
-import { InputType, ReturnType } from "./types";
 import { revalidatePath } from "next/cache";
+import { auth } from "@clerk/nextjs";
+
+import { InputType, ReturnType } from "./types";
 import { createSafeAction } from "@/lib/create-safe-action";
-import { CreateClass } from "./schema";
+import { UpdateClass } from "./schema";
 import { prisma } from "@/lib/prisma";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
@@ -15,11 +16,11 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const { name, teacherName, description } = data;
+  const { classId, name, teacherName, description } = data;
 
   if (!name || !teacherName) {
     return {
-      error: "Input tidak lengkap, gagal menambahkan kelas!",
+      error: "Input tidak lengkap, gagal mengupdate kelas!",
     };
   }
 
@@ -41,25 +42,27 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   let newClass;
 
   try {
-    newClass = await prisma?.class.create({
+    newClass = await prisma?.class.update({
+      where: {
+        classId,
+      },
       data: {
-        userId: user.id,
         name,
         teacherName,
-        bannerImageUrl:
-          "https://firebasestorage.googleapis.com/v0/b/apptugas-4da52.appspot.com/o/images%2Fthemes%2Fimg_code.jpg?alt=media&token=e0f8394f-004e-4567-a2f9-6cb3698a9e09",
         description,
       },
     });
   } catch (error) {
     console.log(error);
     return {
-      error: "gagal menambahkan kelas",
+      error: "gagal mengupdate kelas",
     };
+  } finally {
+    await prisma.$disconnect();
   }
 
-  revalidatePath(`/u`);
+  revalidatePath(`/u/c/${classId}`);
   return { data: newClass };
 };
 
-export const createClass = createSafeAction(CreateClass, handler);
+export const updateClass = createSafeAction(UpdateClass, handler);

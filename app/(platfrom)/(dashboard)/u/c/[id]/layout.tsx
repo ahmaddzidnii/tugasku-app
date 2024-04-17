@@ -29,13 +29,13 @@ const CoridorClassLayout = async ({
   }
   return (
     <>
-      <div className="sticky mb-5 bg-background h-14 w-full flex items-center px-4 justify-between border-b">
+      <div className="sticky bg-background h-14 w-full flex items-center px-4 justify-between border-b">
         <BreadcrumbClass />
         <div className="flex items-center">
           <SubNavAction id={params.id} />
         </div>
       </div>
-      {children}
+      <div className="px-4 py-4">{children}</div>
     </>
   );
 };
