@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { HiOutlineHome } from "react-icons/hi2";
+import { CiHome } from "react-icons/ci";
 import { Separator } from "@radix-ui/react-select";
 import { usePathname } from "next/navigation";
 
@@ -34,7 +34,7 @@ export const SidebarMobile = ({ data }: { data: Classes }) => {
                 href="/u"
                 className={cn("flex items-center p-2 rounded-xl", pathname === "/u" && "bg-muted")}
               >
-                <HiOutlineHome className="w-10 h-10 me-4" />
+                <CiHome className="w-10 h-10 me-4" />
                 Beranda
               </Link>
               <Separator className="my-5" />

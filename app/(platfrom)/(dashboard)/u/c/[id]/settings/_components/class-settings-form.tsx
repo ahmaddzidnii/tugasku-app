@@ -3,6 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import toast from "react-hot-toast";
+import TextareaAutosize from "react-textarea-autosize";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +20,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useAction } from "@/hooks/use-action";
 import { updateClass } from "@/actions/update-class";
-import toast from "react-hot-toast";
 
 const profileFormSchema = z.object({
   className: z.string().min(2, {
@@ -36,7 +37,7 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 export function ClassSettingsForm({ detailClass }: { detailClass: any }) {
   const { execute, isLoading } = useAction(updateClass, {
     onSuccess(data) {
-      toast.success(`Kelas ${data.name} telah di ubah!`);
+      toast.success(`Kelas ${data.name} telah diperbarui!`);
     },
     onError(error) {
       toast.error(error);
@@ -67,7 +68,7 @@ export function ClassSettingsForm({ detailClass }: { detailClass: any }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8"
+        className="space-y-5"
       >
         <FormField
           control={form.control}
@@ -111,10 +112,10 @@ export function ClassSettingsForm({ detailClass }: { detailClass: any }) {
             <FormItem>
               <FormLabel>Deskripsi Kelas</FormLabel>
               <FormControl>
-                <Textarea
+                <TextareaAutosize
                   placeholder="Deskripsikan Kelas kamu..."
-                  className="resize-none"
                   {...field}
+                  className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
                 />
               </FormControl>
               <FormMessage />
@@ -125,7 +126,7 @@ export function ClassSettingsForm({ detailClass }: { detailClass: any }) {
           disabled={isLoading}
           type="submit"
         >
-          Update Kelas
+          {isLoading ? "Memperbarui.." : "Perbarui kelas"}
         </Button>
       </form>
     </Form>

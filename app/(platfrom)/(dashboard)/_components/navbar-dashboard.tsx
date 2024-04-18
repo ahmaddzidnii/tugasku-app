@@ -19,11 +19,7 @@ export const NavbarDashboard = () => {
         </div>
       </ClerkLoading>
       <ClerkLoaded>
-        <UserButton
-          userProfileMode="navigation"
-          userProfileUrl="/user-settings"
-          afterSignOutUrl="/login"
-        />
+        <UserButton afterSignOutUrl="/login" />
       </ClerkLoaded>
     </header>
   );

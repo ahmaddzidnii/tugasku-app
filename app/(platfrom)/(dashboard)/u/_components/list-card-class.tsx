@@ -8,7 +8,7 @@ export const ListCardClass = async () => {
   return (
     <>
       {classes.length === 0 ? (
-        <div className="w-full mt-5">
+        <div className="w-full mt-20">
           <EmptyDataUi
             text="Tidak Ada Kelas!"
             svgClassName="w-[200px] h-[200px]"
