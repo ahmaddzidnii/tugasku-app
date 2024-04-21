@@ -3,6 +3,7 @@
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import * as Sentry from "@sentry/nextjs";
 
 import { InputType, ReturnType } from "./types";
 import { createSafeAction } from "@/lib/create-safe-action";
@@ -48,6 +49,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     console.log(error);
+    Sentry.captureException(error);
     return {
       error: "gagal menghapus kelas",
     };
@@ -57,7 +59,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   return {
     data: result,
   };
-  redirect("/u");
 };
 
 export const deleteClass = createSafeAction(DeleteClass, handler);

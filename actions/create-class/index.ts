@@ -1,11 +1,13 @@
 "use server";
 
 import { auth } from "@clerk/nextjs";
-import { InputType, ReturnType } from "./types";
 import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
+import * as Sentry from "@sentry/nextjs";
+
 import { CreateClass } from "./schema";
 import { prisma } from "@/lib/prisma";
+import { InputType, ReturnType } from "./types";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId } = auth();
@@ -53,6 +55,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     console.log(error);
+    Sentry.captureException(error);
     return {
       error: "gagal menambahkan kelas",
     };
