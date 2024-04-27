@@ -9,6 +9,20 @@ export default function ClassTaskPage({ params }: { params: { id: string } }) {
     <div className="max-w-6xl mx-auto">
       <div>
         <section>
+          <h2 className="text-muted-foreground font-semibold text-xl">Late</h2>
+          <Separator className="mt-5 mb-4" />
+          <div className="mb-4">
+            <div className="flex items-center justify-center">
+              <img
+                className="w-16 h-16"
+                src={taskCompletedSvg.src}
+                alt="svg_task"
+              />
+              <h1>Good, keep it up!</h1>
+            </div>
+          </div>
+        </section>
+        <section>
           <h2 className="text-muted-foreground font-semibold text-xl">Due today</h2>
           <Separator className="mt-5 mb-4" />
           <div className="mb-4">
