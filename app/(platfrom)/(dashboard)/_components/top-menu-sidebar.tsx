@@ -10,8 +10,8 @@ export const TopMenuSidebar = () => {
   return (
     <div className="me-4">
       <Link
-        href="/u"
-        className={cn("flex items-center p-2 rounded-xl", pathname === "/u" && "bg-muted")}
+        href="/u/c"
+        className={cn("flex items-center p-2 rounded-xl", pathname === "/u/c" && "bg-muted")}
       >
         <CiHome className="w-10 h-10 me-4" />
         Beranda

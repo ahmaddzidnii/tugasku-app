@@ -25,7 +25,7 @@ export const DangerousSettingsClass = ({ detailClass }: { detailClass: any }) =>
     onSuccess(data) {
       if (data) {
         toast.success(`Kelas ${data.name} telah berhasil di hapus!`);
-        router.replace("/u");
+        router.replace("/u/c");
       }
     },
     onError(error) {

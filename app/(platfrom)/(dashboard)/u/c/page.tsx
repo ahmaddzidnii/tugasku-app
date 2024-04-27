@@ -9,7 +9,7 @@ export const metadata = {
   description: "Dashboard",
 };
 
-const PlatformMainPage = () => {
+const ClassMainPage = () => {
   return (
     <>
       <div className="px-5 w-full">
@@ -27,4 +27,4 @@ const PlatformMainPage = () => {
   );
 };
 
-export default PlatformMainPage;
+export default ClassMainPage;

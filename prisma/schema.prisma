@@ -57,7 +57,7 @@ model Class {
 }
 
 model Task {
-  id      String @id @default(cuid())
+  taskId      String @id @default(cuid())
   classId  String
   isCompleted Boolean @default(false)
   isOverdue Boolean @default(false)

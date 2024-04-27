@@ -32,7 +32,10 @@ export const SidebarMobile = ({ data }: { data: Classes }) => {
             <div>
               <Link
                 href="/u"
-                className={cn("flex items-center p-2 rounded-xl", pathname === "/u" && "bg-muted")}
+                className={cn(
+                  "flex items-center p-2 rounded-xl",
+                  pathname === "/u/c" && "bg-muted"
+                )}
               >
                 <CiHome className="w-10 h-10 me-4" />
                 Beranda

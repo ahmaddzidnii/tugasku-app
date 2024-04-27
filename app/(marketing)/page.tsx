@@ -14,21 +14,19 @@ export default function Home() {
     <>
       <div className="pt-44 flex items-center lg:flex-row flex-col justify-center gap-10">
         <div className="flex-1 flex flex-col gap-4 text-center lg:text-start">
-          <h3 className="font-semibold text-[#E730CA] text-2xl ">
-            Jangan lupakan tugasmu!
-          </h3>
+          <h3 className="font-semibold text-[#E730CA] text-2xl ">Jangan lupakan tugasmu!</h3>
           <h1 className="text-[40px] font-extrabold">
             Catat, Atur, dan Selesaikan Tugas Anda dengan Lebih Mudah!
           </h1>
           <p className="font-light text-2xl">
-            Aplikasi pencatat tugas kami membantu Anda mengatur hidup dengan
-            lebih efisien dan efektif.
+            Aplikasi pencatat tugas kami membantu Anda mengatur hidup dengan lebih efisien dan
+            efektif.
           </p>
           <Button
             className="w-full lg:w-1/3"
             asChild
           >
-            <Link href="/u">Coba sekarang</Link>
+            <Link href="/u/c">Coba sekarang</Link>
           </Button>
         </div>
 

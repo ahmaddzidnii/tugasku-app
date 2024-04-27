@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { getAllClass } from "@/service/get-all-class";
 import { SidebarMobile } from "./sidebar-mobile";
+import { Badge } from "@/components/ui/badge";
 
 export const SidebarContent = ({ data }: { data: Classes }) => {
   const classArchived = data.filter((item) => item.isArchived === true);
@@ -24,7 +25,9 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
       >
         <AccordionItem value="all">
           <AccordionTrigger>
-            <h1 className="text-lg font-semibold ">Semua Kelas</h1>
+            <h1 className="text-lg font-semibold ">
+              Semua Kelas <Badge variant="secondary">{classActive.length}</Badge>
+            </h1>
           </AccordionTrigger>
           <AccordionContent>
             <div className="pe-2">
@@ -34,7 +37,9 @@ export const SidebarContent = ({ data }: { data: Classes }) => {
         </AccordionItem>
         <AccordionItem value="diarsipkan">
           <AccordionTrigger>
-            <h1 className="text-lg font-semibold ">Diarsipkan</h1>
+            <h1 className="text-lg font-semibold ">
+              Diarsipkan <Badge variant="secondary">{classArchived.length}</Badge>
+            </h1>
           </AccordionTrigger>
           <AccordionContent>
             <div className="pe-2">
