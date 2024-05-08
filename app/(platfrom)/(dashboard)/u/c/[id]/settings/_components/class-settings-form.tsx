@@ -17,7 +17,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useAction } from "@/hooks/use-action";
 import { updateClass } from "@/actions/update-class";
 
@@ -29,7 +28,10 @@ const profileFormSchema = z.object({
     required_error: "Please select an email to display.",
   }),
 
-  descriptionClass: z.string().optional(),
+  descriptionClass: z
+    .string()
+    .max(1000, { message: "Deskripsi kelas maksimal 1000 karakter" })
+    .optional(),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;

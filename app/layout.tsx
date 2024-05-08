@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
+
+import "./globals.css";
+import { ProgressBarProvider } from "@/providers/progress-bar-provider";
 
 export const metadata: Metadata = {
   title: {
@@ -19,12 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className="min-w-[250px]"
     >
       <body suppressHydrationWarning>
-        <NextTopLoader
-          color="#6034D4"
-          showSpinner={false}
-        />
         <Toaster position="bottom-right" />
-        {children}
+        <ProgressBarProvider>{children}</ProgressBarProvider>
       </body>
     </html>
   );

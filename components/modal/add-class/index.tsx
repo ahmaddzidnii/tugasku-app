@@ -28,6 +28,7 @@ export const ModalAddClass = () => {
     const descriptionClass = formData.get("description-class") as string;
     execute({ name: nameClass, teacherName: nameTeacher, description: descriptionClass });
   };
+
   return (
     <Dialog
       open={isOpen && modalName === "ADD_CLASS"}

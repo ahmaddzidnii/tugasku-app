@@ -31,7 +31,7 @@ export const SidebarMobile = ({ data }: { data: Classes }) => {
           >
             <div>
               <Link
-                href="/u"
+                href="/u/c"
                 className={cn(
                   "flex items-center p-2 rounded-xl",
                   pathname === "/u/c" && "bg-muted"

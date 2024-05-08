@@ -25,6 +25,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
+  if (description?.length! > 1000) {
+    return {
+      error: "Deskripsi tidak boleh lebih dari 1000 karakter!",
+    };
+  }
+
   const user = await prisma?.user.findFirst({
     where: {
       userId,
@@ -57,11 +63,11 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     console.log(error);
     Sentry.captureException(error);
     return {
-      error: "gagal menambahkan kelas",
+      error: "Gagal menambahkan kelas!",
     };
   }
 
-  revalidatePath(`/u`);
+  revalidatePath(`/u/c`);
   return { data: newClass };
 };
 
