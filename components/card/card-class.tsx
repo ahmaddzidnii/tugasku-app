@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next-nprogress-bar";
+
 import { Button } from "../ui/button";
 import { Meteors } from "../ui/ui-aceternity/meteors";
 import { Skeleton } from "../ui/skeleton";
-import { useEffect, useState } from "react";
-import { useRouter } from "next-nprogress-bar";
 
 interface CardClassProps {
   name: string;
@@ -34,13 +35,9 @@ export const CardClass = ({
   if (!isMounted) return <CardClassSkeleton />;
 
   return (
-    <article
+    <Link
+      href={`/u/c/${classId}`}
       role="button"
-      onClick={() => {
-        router.push(`/u/c/${classId}`, {
-          scroll: false,
-        });
-      }}
       className="w-full relative z-10 flex flex-col rounded-2xl shadow-sm bg-bacground border border-primary-800  h-full overflow-hidden hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
     >
       <img
@@ -50,27 +47,29 @@ export const CardClass = ({
       />
 
       <div className="relative  p-4 flex flex-col justify-end items-start">
-        <Link href={`/u/c/${classId}`}>
-          <h1 className="font-bold text-xl text-foreground relative z-50 line-clamp-2">{name}</h1>
-          <p className=" mb-4 text-muted-foreground text-sm line-clamp-1">{teacherName}</p>
+        <h1 className="font-bold text-xl text-foreground relative z-50 line-clamp-2">{name}</h1>
+        <p className=" mb-4 text-muted-foreground text-sm line-clamp-1">{teacherName}</p>
 
-          <p className="font-normal text-base text-muted-foreground mb-4 relative z-50 text-justify  line-clamp-1">
-            {!description ? "Kelas ini tidak memiliki deskripsi" : description}
-          </p>
-        </Link>
+        <p className="font-normal text-base text-muted-foreground mb-4 relative z-50 text-justify  line-clamp-1">
+          {!description ? "Kelas ini tidak memiliki deskripsi" : description}
+        </p>
 
-        <div className="flex">
+        <div className="flex z-[999]">
           <Button
             variant="default"
             className="border px-4 py-1 rounded-lg"
-            asChild
+            onClick={() => {
+              router.push(`/u/c/${classId}/assignments`, {
+                scroll: false,
+              });
+            }}
           >
-            <Link href={`/u/c/${classId}/assignments`}>Lihat catatan tugas</Link>
+            Lihat catatan tugas
           </Button>
         </div>
         <Meteors number={meteor_number} />
       </div>
-    </article>
+    </Link>
   );
 };
 
