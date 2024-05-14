@@ -2,13 +2,14 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 const isProtectedRoute = createRouteMatcher(["/u(.*)"]);
+const redirectUrl = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL;
 export default clerkMiddleware((auth, req) => {
   if (isProtectedRoute(req)) {
     auth().protect();
   }
 
   if (auth().userId && req.nextUrl.pathname === "/") {
-    return NextResponse.redirect(new URL("/u/c", req.url));
+    return NextResponse.redirect(new URL(redirectUrl!, req.url));
   }
 });
 
