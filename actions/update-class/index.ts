@@ -1,8 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { auth } from "@clerk/nextjs";
-import * as Sentry from "@sentry/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 import { InputType, ReturnType } from "./types";
 import { createSafeAction } from "@/lib/create-safe-action";
@@ -55,7 +54,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     console.log(error);
-    Sentry.captureException(error);
     return {
       error: "gagal mengupdate kelas",
     };

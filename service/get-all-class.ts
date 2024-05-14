@@ -1,6 +1,6 @@
 import { axiosInstance } from "@/lib/axios";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { Class } from "@prisma/client";
 
 interface Response {

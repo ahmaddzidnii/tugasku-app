@@ -1,9 +1,7 @@
 "use server";
 
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
-import * as Sentry from "@sentry/nextjs";
 
 import { InputType, ReturnType } from "./types";
 import { createSafeAction } from "@/lib/create-safe-action";
@@ -49,7 +47,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     console.log(error);
-    Sentry.captureException(error);
     return {
       error: "gagal menghapus kelas",
     };

@@ -1,7 +1,5 @@
-import { Plus } from "lucide-react";
 import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
 
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ToogleNavbar } from "./toogle-navbar";
 import { ButtonAddClass } from "@/components/modal/add-class/button-add-class";
