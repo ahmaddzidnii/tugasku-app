@@ -74,17 +74,22 @@ app.get("/:classId", zValidator("param", z.object({ classId: z.string() })), asy
     );
   }
   try {
-    const data = await prisma.class.findUnique({
+    const classById = await prisma.class.findUnique({
       where: {
         classId: classId,
       },
     });
+
+    if (!classById) {
+      return c.json({ error: "Class not found" }, 404);
+    }
+
     return c.json({
       success: true,
       request: {
         classId,
       },
-      data: data,
+      data: classById,
     });
   } catch (error) {
     console.log(error);
