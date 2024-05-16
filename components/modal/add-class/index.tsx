@@ -8,11 +8,16 @@ import { FormTextarea } from "@/components/form/form-textarea";
 import { FormSubmit } from "@/components/form/form-submit";
 import { useAction } from "@/hooks/use-action";
 import { createClass } from "@/actions/create-class";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const ModalAddClass = () => {
   const { isOpen, modalName, onClose } = useModal();
+  const queryClient = useQueryClient();
   const { execute } = useAction(createClass, {
     onSuccess(data) {
+      queryClient.invalidateQueries({
+        queryKey: ["classes"],
+      });
       toast.success(`Kelas ${data.name} berhasil dibuat!`);
       onClose();
     },

@@ -1,5 +1,6 @@
 "use client";
 
+import { ModalAddAssignment } from "@/components/modal/add-assignment";
 import { ModalAddClass } from "@/components/modal/add-class";
 import { useEffect, useState } from "react";
 
@@ -17,6 +18,7 @@ export const ModalProvider = () => {
   return (
     <>
       <ModalAddClass />
+      <ModalAddAssignment />
     </>
   );
 };
