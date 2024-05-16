@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { deleteClass } from "@/actions/delete-class";
 import { Button } from "@/components/ui/button";
@@ -20,10 +21,12 @@ import {
 import { archiveClass } from "@/actions/archive-class";
 
 export const DangerousSettingsClass = ({ detailClass }: { detailClass: any }) => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const { execute, isLoading } = useAction(deleteClass, {
     onSuccess(data) {
       if (data) {
+        queryClient.invalidateQueries({ queryKey: ["classes"] });
         toast.success(`Kelas ${data.name} telah berhasil di hapus!`);
         router.replace("/u/c");
       }

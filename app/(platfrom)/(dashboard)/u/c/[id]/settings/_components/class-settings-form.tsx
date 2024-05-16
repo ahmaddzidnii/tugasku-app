@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useAction } from "@/hooks/use-action";
 import { updateClass } from "@/actions/update-class";
+import { useQueryClient } from "@tanstack/react-query";
 
 const profileFormSchema = z.object({
   className: z.string().min(2, {
@@ -37,8 +38,12 @@ const profileFormSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export function ClassSettingsForm({ detailClass }: { detailClass: any }) {
+  const queryClient = useQueryClient();
   const { execute, isLoading } = useAction(updateClass, {
     onSuccess(data) {
+      queryClient.invalidateQueries({
+        queryKey: ["classes"],
+      });
       toast.success(`Kelas ${data.name} telah diperbarui!`);
     },
     onError(error) {

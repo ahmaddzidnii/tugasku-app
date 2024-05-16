@@ -1,6 +1,5 @@
-import { axiosInstance } from "@/lib/axios";
-import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
+import { axiosInstance } from "@/lib/axios";
 
 import { Class } from "@prisma/client";
 
@@ -22,18 +21,10 @@ export async function getAllClass() {
   return data.data;
 }
 export async function getClassById(classId: string) {
-  // const data = await prisma.class.findUnique({
-  //   where: {
-  //     classId: classId,
-  //   },
-  // });
   try {
     const { data } = await axiosInstance.get<{ data: Class }>(
       `${process.env.WEB_DOMAIN}/api/v2/classes/${classId}`,
       {
-        params: {
-          userId: auth().userId as string,
-        },
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${await auth().getToken()}`,
@@ -42,7 +33,7 @@ export async function getClassById(classId: string) {
       }
     );
     return data.data;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.log(error.message);
   }
 }

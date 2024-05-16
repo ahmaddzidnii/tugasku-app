@@ -1,12 +1,9 @@
 import { create } from "zustand";
 
-// enum ModalName {
-//   ADD_CLASS,
-// }
 interface UseModalHook {
   isOpen: boolean;
-  modalName: "ADD_CLASS" | "ADD_TASK" | undefined;
-  onOpen: (modalName: "ADD_CLASS" | "ADD_TASK") => void;
+  modalName: "ADD_CLASS" | "ADD_ASSIGNMENT" | undefined;
+  onOpen: (modalName: "ADD_CLASS" | "ADD_ASSIGNMENT") => void;
   onClose: () => void;
 }
 

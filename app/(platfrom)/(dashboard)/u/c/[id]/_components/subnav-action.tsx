@@ -1,10 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useModal } from "@/hooks/use-modal";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import { IoMdSettings } from "react-icons/io";
 
 export function SubNavAction({ id }: { id: string }) {
+  const modal = useModal();
+
   return (
     <>
       <Button
@@ -12,7 +15,7 @@ export function SubNavAction({ id }: { id: string }) {
         variant="ghost"
         title="Tambahkan Tugas"
         onClick={() => {
-          console.log("Buyerkan Tugas");
+          modal.onOpen("ADD_ASSIGNMENT");
         }}
       >
         <Plus />
