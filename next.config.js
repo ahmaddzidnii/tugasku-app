@@ -7,9 +7,10 @@ const nextConfig = {
         hostname: "firebasestorage.googleapis.com",
       },
     ],
-  experimental: {
-    serverActions: {
-      allowedOrigins: [process.env.NEXT_PUBLIC_WEB_DOMAIN],
+    experimental: {
+      serverActions: {
+        allowedOrigins: [process.env.NEXT_PUBLIC_WEB_DOMAIN],
+      },
     },
   },
 };
