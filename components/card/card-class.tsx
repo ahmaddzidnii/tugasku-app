@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useRouter } from "next-nprogress-bar";
 
 import { Button } from "../ui/button";
 import { Meteors } from "../ui/ui-aceternity/meteors";
 import { Skeleton } from "../ui/skeleton";
+import Image from "next/image";
 
 interface CardClassProps {
   name: string;
@@ -24,29 +24,25 @@ export const CardClass = ({
   image,
   meteor_number = 5,
 }: CardClassProps) => {
-  const [isMounted, setIsMounted] = useState(false);
-
   const router = useRouter();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return <CardClassSkeleton />;
 
   return (
     <Link
       href={`/u/c/${classId}`}
-      role="button"
-      className="w-full relative z-10 flex flex-col rounded-2xl shadow-sm bg-bacground border border-primary-800  h-full overflow-hidden hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+      className="w-full z-10 flex flex-col rounded-2xl shadow-sm bg-bacground border border-primary-800  h-full overflow-hidden hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
     >
-      <img
-        src={image}
-        alt="banner"
-        className="h-full"
-      />
+      <div className="relative w-full h-24">
+        <Skeleton className="h-24" />
+        <Image
+          src={image!}
+          alt="banner"
+          fill
+          quality={100}
+          className="object-cover"
+        />
+      </div>
 
-      <div className="relative  p-4 flex flex-col justify-end items-start">
+      <div className="relative p-4 flex flex-col justify-end items-start">
         <h1 className="font-bold text-xl text-foreground relative z-50 line-clamp-2">{name}</h1>
         <p className=" mb-4 text-muted-foreground text-sm line-clamp-1">{teacherName}</p>
 

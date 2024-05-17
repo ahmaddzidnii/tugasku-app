@@ -35,9 +35,12 @@ import { FormSchema } from "./form-schema";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuth } from "@clerk/nextjs";
+import { RichTextEditor } from "@/components/rich-texteditor";
+import { useState } from "react";
 
 export const ModalAddAssignment = () => {
   const { isOpen, modalName, onClose } = useModal();
+  const [richEditorValue, setRichEditorValue] = useState("");
 
   const { userId } = useAuth();
 
@@ -68,8 +71,10 @@ export const ModalAddAssignment = () => {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast.success(JSON.stringify(data, null, 2));
-    form.reset();
+    console.log({
+      ...data,
+      richEditorValue,
+    });
   }
 
   if (isLoading) {
@@ -84,7 +89,7 @@ export const ModalAddAssignment = () => {
       open={isOpen && modalName === "ADD_ASSIGNMENT"}
       onOpenChange={onClose}
     >
-      <DialogContent className="max-w-xl">
+      <DialogContent className="max-w-xl max-h-[400px] overflow-y-auto scrollbar-none">
         <DialogHeader>
           <DialogTitle className="font-bold text-xl">Buat Tugas</DialogTitle>
           <Form {...form}>
@@ -201,7 +206,10 @@ export const ModalAddAssignment = () => {
                   </FormItem>
                 )}
               />
-
+              <div role="input">
+                <FormLabel>Tulis detail tugas</FormLabel>
+                <RichTextEditor onValueChange={(value) => setRichEditorValue(value)} />
+              </div>
               <Button type="submit">Submit</Button>
             </form>
           </Form>
