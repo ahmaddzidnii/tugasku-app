@@ -38,6 +38,7 @@ export const CardClass = ({
           alt="banner"
           fill
           quality={100}
+          priority
           className="object-cover"
         />
       </div>
@@ -63,7 +64,6 @@ export const CardClass = ({
             Lihat catatan tugas
           </Button>
         </div>
-        <Meteors number={meteor_number} />
       </div>
     </Link>
   );

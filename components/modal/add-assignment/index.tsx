@@ -61,7 +61,7 @@ export const ModalAddAssignment = () => {
   const defaultValues: Partial<z.infer<typeof FormSchema>> = {
     assignments_title: "",
     class_name: undefined,
-    dob: undefined,
+    due: undefined,
   };
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -170,7 +170,7 @@ export const ModalAddAssignment = () => {
               />
               <FormField
                 control={form.control}
-                name="dob"
+                name="due"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Deadline</FormLabel>
