@@ -6,8 +6,21 @@ import { CalendarIcon, Check, ChevronsUpDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useAuth } from "@clerk/nextjs";
+import { RichTextEditor } from "@/components/rich-texteditor";
+import { useState } from "react";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+
 import { useModal } from "@/hooks/use-modal";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogOverlay,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -32,11 +45,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Input } from "@/components/ui/input";
 
 import { FormSchema } from "./form-schema";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useAuth } from "@clerk/nextjs";
-import { RichTextEditor } from "@/components/rich-texteditor";
-import { useState } from "react";
 
 export const ModalAddAssignment = () => {
   const { isOpen, modalName, onClose } = useModal();
@@ -61,7 +69,7 @@ export const ModalAddAssignment = () => {
   const defaultValues: Partial<z.infer<typeof FormSchema>> = {
     assignments_title: "",
     class_name: undefined,
-    dob: undefined,
+    due: undefined,
   };
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -88,6 +96,7 @@ export const ModalAddAssignment = () => {
     <Dialog
       open={isOpen && modalName === "ADD_ASSIGNMENT"}
       onOpenChange={onClose}
+      modal={true}
     >
       <DialogContent className="max-w-xl max-h-[400px] overflow-y-auto scrollbar-none">
         <DialogHeader>
@@ -170,11 +179,14 @@ export const ModalAddAssignment = () => {
               />
               <FormField
                 control={form.control}
-                name="dob"
+                name="due"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Deadline</FormLabel>
-                    <Popover>
+
+                    <DateTimePicker label="Basic date time picker" />
+
+                    {/* <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
@@ -201,7 +213,7 @@ export const ModalAddAssignment = () => {
                           initialFocus
                         />
                       </PopoverContent>
-                    </Popover>
+                    </Popover> */}
                     <FormMessage />
                   </FormItem>
                 )}

@@ -1,40 +1,44 @@
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import "react-quill/dist/quill.snow.css";
+import "froala-editor/css/froala_style.min.css";
+import "froala-editor/css/froala_editor.pkgd.min.css";
 
-// Dynamically import ReactQuill with ssr disabled
-const ReactQuill = dynamic(() => import("react-quill"), {
+const FroalaEditor = dynamic(() => import("react-froala-wysiwyg"), {
   ssr: false,
 });
 
-export const RichTextEditor = ({ onValueChange }: { onValueChange?: (value: string) => void }) => {
-  const [value, setValue] = useState("");
-  const [isMounted, setIsMounted] = useState(false);
+interface RichTextEditorProps {
+  onValueChange?: (value: string) => void;
+}
+export const RichTextEditor = ({ onValueChange }: RichTextEditorProps) => {
+  const [model, setModel] = useState<string>("");
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
   useEffect(() => {
     if (onValueChange) {
-      onValueChange(value);
+      onValueChange(model);
     }
-  }, [value]);
+  }, [model]);
 
-  if (!isMounted) return null;
   return (
-    <ReactQuill
-      id="editor"
-      modules={{
-        toolbar: [
-          [{ header: [false] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [{ list: "ordered" }, { list: "bullet" }],
+    <FroalaEditor
+      model={model}
+      onModelChange={(model: string) => {
+        setModel(model);
+      }}
+      config={{
+        placeholderText: "Tulis detail tugas..",
+        // toolbarButtons: {
+        //   moreText: {
+        //     buttons: ["bold", "italic", "underline", "subscript", "superscript"],
+        //   },
+        // },
+        toolbarButtons: [
+          ["bold", "italic", "underline", "subscript", "superscript", "undo", "redo"],
+          ["alert", "clear", "insert"],
         ],
       }}
-      theme="snow"
-      value={value}
-      onChange={setValue}
+      tag="textarea"
     />
   );
 };

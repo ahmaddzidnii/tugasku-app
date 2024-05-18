@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { Edit2Icon } from "lucide-react";
 function TaskDetailPage() {
   return (
-    <div className="max-w-6xl mx-auto">
+    <div>
       <div className="flex flex-col lg:flex-row gap-x-4">
         <div className="hidden lg:block">
           <div className="bg-primary p-3 rounded-full">
