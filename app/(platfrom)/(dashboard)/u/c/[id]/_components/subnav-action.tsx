@@ -1,13 +1,12 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { useModal } from "@/hooks/use-modal";
 import { Plus } from "lucide-react";
+import { useRouter } from "next-nprogress-bar";
 import Link from "next/link";
 import { IoMdSettings } from "react-icons/io";
 
+import { Button } from "@/components/ui/button";
 export function SubNavAction({ id }: { id: string }) {
-  const modal = useModal();
-
+  const router = useRouter();
   return (
     <>
       <Button
@@ -15,7 +14,7 @@ export function SubNavAction({ id }: { id: string }) {
         variant="ghost"
         title="Tambahkan Tugas"
         onClick={() => {
-          modal.onOpen("ADD_ASSIGNMENT");
+          router.push(`/u/c/${id}/assignments/create`, { scroll: false });
         }}
       >
         <Plus />

@@ -10,5 +10,5 @@ export const FormSchema = z.object({
   class_name: z.string({
     required_error: "Please select a class.",
   }),
-  due: z.date().optional(),
+  due: z.date().optional().nullable(),
 });
