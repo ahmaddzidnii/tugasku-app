@@ -1,44 +1,49 @@
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import OrderedList from "@tiptap/extension-ordered-list";
+import BulletList from "@tiptap/extension-bullet-list";
+import Placeholder from "@tiptap/extension-placeholder";
 
-import "froala-editor/css/froala_style.min.css";
-import "froala-editor/css/froala_editor.pkgd.min.css";
-
-const FroalaEditor = dynamic(() => import("react-froala-wysiwyg"), {
-  ssr: false,
-});
+import { Toolbar } from "./rich-text-editor/toolbar";
 
 interface RichTextEditorProps {
   onValueChange?: (value: string) => void;
 }
 export const RichTextEditor = ({ onValueChange }: RichTextEditorProps) => {
-  const [model, setModel] = useState<string>("");
-
-  useEffect(() => {
-    if (onValueChange) {
-      onValueChange(model);
-    }
-  }, [model]);
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure(),
+      OrderedList.configure({
+        HTMLAttributes: {
+          class: "list-decimal ms-5",
+        },
+      }),
+      BulletList.configure({
+        HTMLAttributes: {
+          class: "list-disc ms-5",
+        },
+      }),
+      Placeholder.configure({
+        placeholder: "Tulis detail tugas..",
+      }),
+    ],
+    // content: "<p>Hello World! 🌎️</p>",
+    editorProps: {
+      attributes: {
+        class: "border-t-2 p-2 min-h-[100px]",
+      },
+    },
+    onUpdate: ({ editor }) => {
+      if (onValueChange) {
+        onValueChange(editor.getHTML());
+      }
+    },
+  });
 
   return (
-    <FroalaEditor
-      model={model}
-      onModelChange={(model: string) => {
-        setModel(model);
-      }}
-      config={{
-        placeholderText: "Tulis detail tugas..",
-        // toolbarButtons: {
-        //   moreText: {
-        //     buttons: ["bold", "italic", "underline", "subscript", "superscript"],
-        //   },
-        // },
-        toolbarButtons: [
-          ["bold", "italic", "underline", "subscript", "superscript", "undo", "redo"],
-          ["alert", "clear", "insert"],
-        ],
-      }}
-      tag="textarea"
-    />
+    <div className="relative border-2 rounded-md">
+      <Toolbar editor={editor} />
+      <EditorContent editor={editor} />
+    </div>
   );
 };

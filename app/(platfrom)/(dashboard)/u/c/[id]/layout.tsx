@@ -35,7 +35,7 @@ const CoridorClassLayout = async ({
           <SubNavAction id={params.id} />
         </div>
       </div>
-      <div className="py-4  max-w-6xl mx-auto">{children}</div>
+      <div className="py-4 px-4  max-w-6xl mx-auto">{children}</div>
     </>
   );
 };
