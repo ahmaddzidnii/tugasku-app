@@ -17,7 +17,7 @@ export const NavbarDashboard = () => {
         </div>
       </ClerkLoading>
       <ClerkLoaded>
-        <UserButton afterSignOutUrl="/login" />
+        <UserButton afterSignOutUrl={`${process.env.NEXT_PUBLIC_WEB_DOMAIN}`} />
       </ClerkLoaded>
     </header>
   );

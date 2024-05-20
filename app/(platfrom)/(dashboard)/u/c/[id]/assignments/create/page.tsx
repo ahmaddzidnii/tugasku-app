@@ -36,11 +36,26 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Input } from "@/components/ui/input";
 
 import { FormSchema } from "@/components/modal/add-assignment/form-schema";
+import { useAction } from "@/hooks/use-action";
+import { createAssignment } from "@/actions/create-assignments";
+import { useRouter } from "next-nprogress-bar";
 
 const CreateAssignment = () => {
   const [richEditorValue, setRichEditorValue] = useState("");
 
   const { userId } = useAuth();
+
+  const router = useRouter();
+
+  const { execute } = useAction(createAssignment, {
+    onSuccess: (data) => {
+      toast.success(`Tugas ${data.taskTitle} telah dibuat!`);
+      router.push(`/u/c/${data.classId}/assignments/${data.taskId}`);
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
 
   const { data, isLoading } = useQuery({
     queryKey: ["classes"],
@@ -72,6 +87,12 @@ const CreateAssignment = () => {
     console.log({
       ...data,
       richEditorValue,
+    });
+
+    execute({
+      classId: data.class_name,
+      taskTitle: data.assignments_title,
+      taskDescription: richEditorValue,
     });
   }
 
