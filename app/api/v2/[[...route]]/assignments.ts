@@ -38,6 +38,7 @@ app.get(
         },
         select: {
           classId: true,
+          name: true,
         },
       });
 
@@ -51,6 +52,23 @@ app.get(
         },
         orderBy: {
           [orderByParsed[0]]: orderByParsed[1],
+        },
+        select: {
+          assignmentId: true,
+          assignmentTitle: true,
+          assignmentDescription: true,
+          dueDate: true,
+          isCompleted: true,
+
+          class: {
+            select: {
+              classId: true,
+              name: true,
+              teacherName: true,
+            },
+          },
+          createdAt: true,
+          updatedAt: true,
         },
       });
 
@@ -73,6 +91,24 @@ app.get("/:assignmentId", async (c) => {
     const assignment = await prisma.assignment.findUnique({
       where: {
         assignmentId,
+      },
+
+      select: {
+        assignmentId: true,
+        assignmentTitle: true,
+        assignmentDescription: true,
+        dueDate: true,
+        isCompleted: true,
+
+        class: {
+          select: {
+            classId: true,
+            name: true,
+            teacherName: true,
+          },
+        },
+        createdAt: true,
+        updatedAt: true,
       },
     });
 

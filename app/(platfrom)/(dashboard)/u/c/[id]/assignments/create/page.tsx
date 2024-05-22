@@ -5,11 +5,11 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuth } from "@clerk/nextjs";
 import { useState } from "react";
@@ -40,6 +40,7 @@ import { Input } from "@/components/ui/input";
 import { useAction } from "@/hooks/use-action";
 import { createAssignment } from "@/actions/create-assignments";
 import { CreateAssignment } from "@/actions/create-assignments/schema";
+import { Loader } from "@/components/loader";
 
 const CreateAssignmentPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>();
@@ -47,9 +48,11 @@ const CreateAssignmentPage = () => {
   const { userId } = useAuth();
 
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { execute } = useAction(createAssignment, {
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["assignments", data.classId] });
       toast.success(`Tugas ${data.assignmentTitle} telah dibuat!`);
       router.push(`/u/c/${data.classId}/assignments/${data.assignmentId}`);
     },
@@ -95,10 +98,7 @@ const CreateAssignmentPage = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center  h-[calc(100vh-10rem)]">
-        <Loader2
-          size={32}
-          className="  animate-spin"
-        />
+        <Loader />
       </div>
     );
   }
