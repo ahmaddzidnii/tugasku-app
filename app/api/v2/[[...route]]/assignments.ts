@@ -45,7 +45,7 @@ app.get(
         return c.json({ error: "Class not found!" }, 404);
       }
 
-      const task = await prisma.task.findMany({
+      const task = await prisma.assignment.findMany({
         where: {
           classId: existingClass.classId,
         },
@@ -67,12 +67,12 @@ app.get(
  * GET /api/v2/assignments/:assignmentsId
  */
 
-app.get("/:assignmentsId", async (c) => {
-  const assignmentsId = c.req.param("assignmentsId");
+app.get("/:assignmentId", async (c) => {
+  const assignmentId = c.req.param("assignmentId");
   try {
-    const assignment = await prisma.task.findUnique({
+    const assignment = await prisma.assignment.findUnique({
       where: {
-        taskId: assignmentsId,
+        assignmentId,
       },
     });
 
@@ -119,10 +119,10 @@ app.post("/", clerkMiddleware(), zValidator("json", CreateAssignment), async (c)
       return c.json({ error: "Class not found!" }, 404);
     }
 
-    const assignment = await prisma.task.create({
+    const assignment = await prisma.assignment.create({
       data: {
-        taskTitle,
-        taskDescription,
+        assignmentTitle: taskTitle,
+        assignmentDescription: taskDescription,
         dueDate,
         class: {
           connect: {

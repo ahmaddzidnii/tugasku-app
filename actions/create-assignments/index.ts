@@ -3,7 +3,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import axios from "axios";
-import { Task } from "@prisma/client";
+import { Assignment } from "@prisma/client";
 
 import { CreateAssignment } from "./schema";
 import { InputType, ReturnType } from "./types";
@@ -23,7 +23,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   let newAssignment;
 
   try {
-    const { data } = await axios.post<Task>(
+    const { data } = await axios.post<Assignment>(
       `${process.env.WEB_DOMAIN}/api/v2/assignments`,
       {
         classId,

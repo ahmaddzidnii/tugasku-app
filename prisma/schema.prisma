@@ -49,18 +49,18 @@ model Class {
   description   String? @db.Text
   teacherName   String
   isArchived    Boolean @default(false)
-  tasks         Task[]
+  assignments   Assignment[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
    @@map("class")
 }
 
-model Task {
-  taskId      String @id @default(cuid())
+model Assignment {
+  assignmentId      String @id @default(cuid())
   classId     String
-  taskTitle    String
-  taskDescription String?
+  assignmentTitle    String
+  assignmentDescription String?
   isCompleted Boolean @default(false)
   dueDate String? 
 
@@ -69,7 +69,7 @@ model Task {
 
   class  Class @relation(fields: [classId],references: [classId],onDelete: Cascade)
 
-  @@map("task")
+  @@map("assignment")
 }
 model Statistic {
   id        String  @id @default(cuid())
