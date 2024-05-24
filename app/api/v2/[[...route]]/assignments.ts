@@ -4,8 +4,10 @@ import { zValidator } from "@hono/zod-validator";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 
 import { prisma } from "@/lib/prisma";
-import { CreateAssignment } from "@/actions/create-assignments/schema";
 import { validateOrderBy } from "@/common/validate-query";
+
+import { CreateAssignment } from "@/app/api/schema/assignments/create";
+import { UpdateAssignment } from "@/app/api/schema/assignments/update";
 
 const app = new Hono();
 
@@ -174,5 +176,55 @@ app.post("/", clerkMiddleware(), zValidator("json", CreateAssignment), async (c)
     return c.json({ error: "Internal Server Error" }, 500);
   }
 });
+
+/**
+ * POST /api/v2/assignments:assignmentId
+ * Update a Assignment
+ */
+
+app.post("/:assignmentId", zValidator("json", UpdateAssignment), async (c) => {
+  const assignmentId = c.req.param("assignmentId");
+
+  const assignmentDTO = c.req.valid("json");
+
+  if (!assignmentId) {
+    return c.json({ error: "Assignment not found!" }, 404);
+  }
+  try {
+    const existingAssignment = await prisma.assignment.findUnique({
+      where: {
+        assignmentId: assignmentId,
+      },
+      select: {
+        assignmentId: true,
+      },
+    });
+
+    if (!existingAssignment) {
+      return c.json({ error: "Assignment not found!" }, 404);
+    }
+
+    const assignment = await prisma.assignment.update({
+      where: {
+        assignmentId: existingAssignment.assignmentId,
+      },
+      data: {
+        ...assignmentDTO,
+      },
+    });
+
+    return c.json(assignment);
+  } catch (error) {
+    console.log(error);
+    return c.json({ error: "Internal Server Error" }, 500);
+  }
+});
+
+/**
+ * DELETE /api/v2/assignments:assignmentId
+ * Update a Assignment
+ */
+
+app.delete("/:assignmentId", async (c) => {});
 
 export default app;
