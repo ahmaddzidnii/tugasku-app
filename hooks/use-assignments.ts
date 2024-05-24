@@ -19,3 +19,13 @@ export const useAssignments = ({ classId }: useAssignmentsProps) => {
     refetchOnWindowFocus: true,
   });
 };
+
+export const useAssignment = ({ assignmentId }: { assignmentId: string }) => {
+  return useQuery({
+    queryKey: ["assignment", assignmentId],
+    queryFn: async () => {
+      const data = await axios.get(`/api/v2/assignments/${assignmentId}`);
+      return data.data;
+    },
+  });
+};

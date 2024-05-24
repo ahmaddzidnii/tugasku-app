@@ -8,8 +8,9 @@ import { Toolbar } from "./rich-text-editor/toolbar";
 
 interface RichTextEditorProps {
   onValueChange?: (value: string) => void;
+  content?: string;
 }
-export const RichTextEditor = ({ onValueChange }: RichTextEditorProps) => {
+export const RichTextEditor = ({ onValueChange, content }: RichTextEditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure(),
@@ -27,7 +28,7 @@ export const RichTextEditor = ({ onValueChange }: RichTextEditorProps) => {
         placeholder: "Tulis detail tugas..",
       }),
     ],
-    // content: "<p>Hello World! 🌎️</p>",
+    content: content,
     editorProps: {
       attributes: {
         class: "border-t-2 p-2 min-h-[100px]",

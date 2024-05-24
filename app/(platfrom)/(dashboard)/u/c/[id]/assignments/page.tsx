@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import taskCompletedSvg from "@/public/svg/task_completed.svg";
 import { useAssignments } from "@/hooks/use-assignments";
 import { Loader } from "@/components/loader";
+import { InternalServerErrorUI } from "@/components/error-components/internal-server-error-ui";
 
 export default function ClassTaskPage({ params }: { params: { id: string } }) {
   const { data, isLoading, isError } = useAssignments({
@@ -20,7 +21,7 @@ export default function ClassTaskPage({ params }: { params: { id: string } }) {
   }
   if (isError) {
     // TODO: add error ui
-    return <div>error</div>;
+    return <InternalServerErrorUI withButton={false} />;
   }
   return (
     <div className="max-w-6xl mx-auto">

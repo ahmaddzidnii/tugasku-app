@@ -6,6 +6,7 @@ import { getAssignment } from "@/service/get-assignment";
 import { NotFoundUI } from "@/components/error-components/not-found-ui";
 import { formatDate } from "@/common/format-date";
 import Link from "next/link";
+import { ButtonMarkCompleted } from "./_components/button-mark-completed";
 
 interface AssignmentDetailPageProps {
   params: {
@@ -51,7 +52,11 @@ async function AssignmentDetailPage({ params }: AssignmentDetailPageProps) {
             </h2>
             <div className="flex justify-between font-bold text-sm">
               <h3>100 Points</h3>
-              <p>{data?.dueDate ? `Due  ${formatDate({ date: data?.dueDate })}` : "No Due Date"}</p>
+              <p>
+                {data?.dueDate
+                  ? `Due  ${formatDate({ date: data?.dueDate, showYear: false })}`
+                  : "No Due Date"}
+              </p>
             </div>
             <Separator className="my-3 bg-primary" />
             <div className="mb-8">
@@ -84,7 +89,10 @@ async function AssignmentDetailPage({ params }: AssignmentDetailPageProps) {
                   <Edit2Icon className="w-5 h-5 mr-2" /> Edit assignments
                 </Link>
               </Button>
-              <Button title="Mark as completed">Mark as completed</Button>
+              <ButtonMarkCompleted
+                assignmentId={data?.assignmentId}
+                isCompleted={data?.isCompleted}
+              />
             </div>
           </div>
         </div>

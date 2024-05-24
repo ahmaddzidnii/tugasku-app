@@ -21,5 +21,5 @@ export const formatDate = ({
 
   return moment(date)
     .locale(locale)
-    .format(`ddd, MMMM ${showYear ? "YYYY" : ""}, h:mm a`);
+    .format(`ddd, DD MMMM ${showYear ? "YYYY" : ""}, h:mm a`);
 };
