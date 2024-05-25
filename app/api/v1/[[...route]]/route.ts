@@ -6,7 +6,7 @@ import assignments from "./assignments";
 
 export const runtime = "nodejs";
 
-const app = new Hono().basePath("/api/v2");
+const app = new Hono().basePath("/api/v1");
 
 app.route("/classes", classes);
 
