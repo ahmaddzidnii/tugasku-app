@@ -1,0 +1,163 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Documentation path /assignments",
+    "description": "API Documentation for Tugasku App path /assignments",
+    "version": "1.0.0",
+    "contact": {
+      "email": "zdngaming312@gmail.com",
+      "name": "Ahmad Zidni Hidayat",
+      "url": "https://ahmadzidni.my.id"
+    }
+  },
+  "servers": [
+    {
+      "url": "{env}/api/v1/",
+      "description": "Server environment",
+      "variables": {
+        "env": {
+          "default": "http://localhost:3000",
+          "enum": ["http://localhost:3000", "https://tugasku.ahmadzidni.my.id"]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/assignments": {
+      "get": {
+        "summary": "Get all assignments",
+        "description": "Get all assignments by classId",
+        "responses": {},
+        "parameters": [
+          {
+            "name": "classId",
+            "required": true,
+            "in": "query",
+            "description": "get assignments by specific classId",
+            "schema": {
+              "type": "string",
+              "nullable": false
+            }
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create an assignment",
+        "description": "Create an assignment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "classId": {
+                    "type": "string",
+                    "nullable": false
+                  },
+                  "taskTitle": {
+                    "type": "string",
+                    "nullable": false
+                  },
+                  "taskDescription": {
+                    "type": "string",
+                    "nullable": false
+                  },
+                  "dueDate": {
+                    "type": "string",
+                    "nullable": false
+                  }
+                },
+                "example": {
+                  "classId": "classId",
+                  "taskTitle": "taskTitle",
+                  "taskDescription": "taskDescription",
+                  "dueDate": "dueDate"
+                }
+              }
+            }
+          },
+          "description": "Payload for creating an assignment"
+        },
+        "responses": {}
+      }
+    },
+    "/assignments/{assignmentId}": {
+      "patch": {
+        "summary": "Update an assignment",
+        "description": "Update an assignment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "classId": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "taskTitle": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "taskDescription": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "dueDate": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "isCompleted": {
+                    "type": "boolean",
+                    "nullable": true
+                  }
+                },
+                "example": {
+                  "classId": "classId",
+                  "taskTitle": "taskTitle",
+                  "taskDescription": "taskDescription",
+                  "dueDate": "dueDate",
+                  "isCompleted": false
+                }
+              }
+            }
+          },
+          "description": "Payload for updating an assignment"
+        },
+        "parameters": [
+          {
+            "name": "assignmentId",
+            "required": true,
+            "description": "ID of the assignment to update",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "nullable": false
+            }
+          }
+        ],
+        "responses": {}
+      },
+
+      "delete": {
+        "summary": "Delete an assignment",
+        "description": "Delete an assignment",
+        "responses": {},
+        "parameters": [
+          {
+            "name": "assignmentId",
+            "required": true,
+            "description": "ID of the assignment to delete",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "nullable": false
+            }
+          }
+        ]
+      }
+    }
+  }
+}
